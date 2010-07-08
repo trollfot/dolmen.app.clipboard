@@ -9,22 +9,25 @@ readme = open(join('src', 'dolmen', 'app', 'clipboard', 'README.txt')).read()
 history = open(join('docs', 'HISTORY.txt')).read()
 
 install_requires = [
-    'setuptools',
-    'dolmen.content',
-    'dolmen.app.security',
-    'dolmen.menu',
-    'zope.copypastemove',
-    'zope.intid',
-    'zope.traversing',
+    'grok',
+    'grokcore.viewlet',
     'dolmen.app.layout',
-    'dolmen.app.site',
+    'dolmen.app.security',
+    'zope.container',
+    'zope.i18nmessageid',
+    'zope.interface',
+    'zope.location',
+    'zope.principalannotation',
+    'dolmen.menu',
+    'setuptools',
     'zope.annotation',
     'zope.component',
-    'zope.copy>=3.5.0'
+    'zope.copy>=3.5.0',
+    'zope.copypastemove',
+    'zope.intid',
     ]
 
 tests_require = [
-    'grok',
     'grokcore.component',
     'zope.container',
     'zope.publisher',
@@ -38,6 +41,8 @@ tests_require = [
     'zope.browserpage',
     'zope.i18n',
     'zope.testing',
+    'zope.principalannotation',
+    'zope.security',
     ]
 
 setup(name = name,
