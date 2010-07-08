@@ -3,19 +3,18 @@
 import grok
 import dolmen.app.security.content as security
 
+from dolmen.app.clipboard import MF as _
+
 from zope.intid import IIntIds
 from zope.interface import Interface, Attribute, implements
 from zope.location import ILocation
 from zope.container.interfaces import IContainer
 from zope.component import getUtility
-from zope.i18nmessageid import MessageFactory
 from zope.annotation.interfaces import IAnnotations
 from zope.copypastemove.interfaces import IObjectCopier, IObjectMover
 from zope.copypastemove.interfaces import IPrincipalClipboard
 from zope.traversing.browser.absoluteurl import absoluteURL
-from zope.container.interfaces import DuplicateIDError
-
-_ = MessageFactory("dolmen.app.clipboard")
+from zope.container.interfaces import DuplicateIDError, InvalidItemType
 
 
 class IClipboardAction(Interface):
@@ -24,11 +23,11 @@ class IClipboardAction(Interface):
 
 
 def copy_action(item, container):
-    copier = IObjectCopier(obj)
+    copier = IObjectCopier(item)
     try:
         copier.copyTo(container)
         return True
-    except (KeyError, DuplicateIDError):
+    except (KeyError, DuplicateIDError, InvalidItemType):
         return False
 
 
@@ -37,14 +36,14 @@ def move_action(item, container):
     try:
         mover.moveTo(container)
         return True
-    except (KeyError, DuplicateIDError):
+    except (KeyError, DuplicateIDError, InvalidItemType):
         return False
 
 
 class ClipboardAction(object):
     implements(IClipboardAction)
     
-    def __init__(self, name, type, processor):
+    def __init__(self, name, mesg, processor):
         self.name = name
         self.mesg = mesg
         self.func = processor
@@ -59,7 +58,7 @@ class ClipboardAction(object):
         return '<ClipboardAction %r>' % self.name
 
 
-CUT = ClipboardAction('CUT', _('Cut'), cut_action)
+CUT = ClipboardAction('CUT', _('Cut'), move_action)
 COPY = ClipboardAction('COPY', _('Copy'), copy_action)
 
 
@@ -77,9 +76,10 @@ def addToClipboard(request, items, action=COPY, clear=True):
     assert IClipboardAction.providedBy(action)
     
     intids = getUtility(IIntIds)
+    ids = list()
     added = list()
     errors = list()
-    intids = list()
+
 
     for item in items:
         uid = intids.queryId(item)
@@ -87,14 +87,14 @@ def addToClipboard(request, items, action=COPY, clear=True):
             errors.append(item)
         else:
             added.append(item)
-            intids.append(uid)
+            ids.append(uid)
 
-    if intids:
+    if ids:
         clipboard = getPrincipalClipboard(request)
         if clear is True:
             # We clear the clipboard before filling it.
             clipboard.clearContents()
-        clipboard.addItems(action, intids)
+        clipboard.addItems(action, ids)
  
     return added, errors
 
@@ -122,6 +122,6 @@ def processClipboard(request, container):
         if result is False:
             errors.append(item)
         else:
-            pasted.appened(item)
+            pasted.append(item)
     
     return pasted, errors

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import grokcore.viewlet as grok
 from dolmen import menu
+from zope.location import ILocation
 from dolmen.app.layout import MenuViewlet, AboveBody
 
 

@@ -4,8 +4,9 @@ import grok
 import dolmen.app.security.content as security
 
 from dolmen import menu
+from dolmen.app.clipboard import MF as _
 from dolmen.app.clipboard import actions
-from dolmen.app.clipboard import getPrincipalClipboard
+from dolmen.app.clipboard.menu import CopyPasteMenu
 
 from zope.intid import IIntIds
 from zope.interface import Interface
@@ -29,7 +30,7 @@ class ClearClipBoard(grok.View):
     def render(self):
         """Clears the clipboard.
         """
-        clipboard = getPrincipalClipboard(self.request)
+        clipboard = actions.getPrincipalClipboard(self.request)
         clipboard.clearContents()
         self.flash(_(u"clipboard_cleared", u"Clipboard cleared"))
         return self.redirect(absoluteURL(self.context, self.request))
@@ -89,7 +90,6 @@ class HandlePaste(grok.View):
     grok.title(_(u"Paste"))
     grok.context(IContainer)
     grok.require(security.CanPasteContent)
-    grok.implements(IClipboardAction)
 
     def render(self):
         """Paste an object from the clipboard.
