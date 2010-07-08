@@ -12,15 +12,32 @@ install_requires = [
     'setuptools',
     'dolmen.content',
     'dolmen.app.security',
-    'megrok.menu',
+    'dolmen.menu',
     'zope.copypastemove',
+    'zope.intid',
+    'zope.traversing',
+    'dolmen.app.layout',
+    'dolmen.app.site',
+    'zope.annotation',
+    'zope.component',
     'zope.copy>=3.5.0'
     ]
 
-tests_require = install_requires + [
+tests_require = [
+    'grok',
+    'grokcore.component',
+    'zope.container',
+    'zope.publisher',
+    'zope.site',
+    'zope.securitypolicy',
+    'zope.pluggableauth',
+    'zope.principalregistry',
+    'zope.app.appsetup',
+    'zope.app.publication',
+    'zope.app.wsgi >= 3.9.2',
+    'zope.browserpage',
+    'zope.i18n',
     'zope.testing',
-    'zope.app.testing',
-    'zope.app.zcmlfiles'
     ]
 
 setup(name = name,
