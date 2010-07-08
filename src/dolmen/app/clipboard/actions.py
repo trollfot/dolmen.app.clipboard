@@ -1,19 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import grok
-import dolmen.app.security.content as security
-
 from dolmen.app.clipboard import MF as _
-
 from zope.intid import IIntIds
 from zope.interface import Interface, Attribute, implements
-from zope.location import ILocation
-from zope.container.interfaces import IContainer
 from zope.component import getUtility
 from zope.annotation.interfaces import IAnnotations
 from zope.copypastemove.interfaces import IObjectCopier, IObjectMover
 from zope.copypastemove.interfaces import IPrincipalClipboard
-from zope.traversing.browser.absoluteurl import absoluteURL
 from zope.container.interfaces import DuplicateIDError, InvalidItemType
 
 
@@ -42,7 +35,7 @@ def move_action(item, container):
 
 class ClipboardAction(object):
     implements(IClipboardAction)
-    
+
     def __init__(self, name, mesg, processor):
         self.name = name
         self.mesg = mesg
@@ -74,12 +67,11 @@ def addToClipboard(request, items, action=COPY, clear=True):
     assert len(items)
     assert isinstance(items, list)
     assert IClipboardAction.providedBy(action)
-    
+
     intids = getUtility(IIntIds)
     ids = list()
     added = list()
     errors = list()
-
 
     for item in items:
         uid = intids.queryId(item)
@@ -95,7 +87,7 @@ def addToClipboard(request, items, action=COPY, clear=True):
             # We clear the clipboard before filling it.
             clipboard.clearContents()
         clipboard.addItems(action, ids)
- 
+
     return added, errors
 
 
@@ -123,5 +115,5 @@ def processClipboard(request, container):
             errors.append(item)
         else:
             pasted.append(item)
-    
+
     return pasted, errors

@@ -7,18 +7,8 @@ from dolmen import menu
 from dolmen.app.clipboard import MF as _
 from dolmen.app.clipboard import actions
 from dolmen.app.clipboard.menu import CopyPasteMenu
-
-from zope.intid import IIntIds
-from zope.interface import Interface
 from zope.location import ILocation
 from zope.container.interfaces import IContainer
-from zope.component import getUtility
-from zope.i18nmessageid import MessageFactory
-from zope.annotation.interfaces import IAnnotations
-from zope.copypastemove.interfaces import IObjectCopier, IObjectMover
-from zope.copypastemove.interfaces import IPrincipalClipboard
-from zope.traversing.browser.absoluteurl import absoluteURL
-from zope.container.interfaces import DuplicateIDError
 
 
 @menu.menuentry(CopyPasteMenu)
@@ -33,7 +23,7 @@ class ClearClipBoard(grok.View):
         clipboard = actions.getPrincipalClipboard(self.request)
         clipboard.clearContents()
         self.flash(_(u"clipboard_cleared", u"Clipboard cleared"))
-        return self.redirect(absoluteURL(self.context, self.request))
+        return self.redirect(self.url(self.context))
 
 
 @menu.menuentry(CopyPasteMenu)
@@ -95,7 +85,7 @@ class HandlePaste(grok.View):
         """Paste an object from the clipboard.
         """
         pasted, errors = actions.processClipboard(self.request, self.context)
-        
+
         if len(errors):
             names = [error.__name__ for error in errors]
             self.flash(_("paste_errors",
@@ -107,5 +97,5 @@ class HandlePaste(grok.View):
             self.flash(_(u"object_pasted",
                          u"Object(s) ${names} pasted with success.",
                          mapping={"names": ', '.join(names)}))
-        
+
         return self.redirect(self.url(self.context))
