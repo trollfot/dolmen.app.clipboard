@@ -1,74 +1,76 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: dolmen.app.clipboard\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2010-07-23 15:35+0000\n"
-"PO-Revision-Date: 2009-05-05 16:08+0100\n"
-"Last-Translator: Souheil CHELFOUH <souheil@chelfouh.com>\n"
-"Language-Team: Souheil CHELFOUH <souheil@chelfouh.com>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"Language-Code: fr\n"
-"Language-Name: Français\n"
-"Preferred-Encodings: utf-8\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
 "Domain: dolmen.app.clipboard\n"
-"X-Is-Fallback-For: fr-be fr-ca fr-lu fr-mc fr-ch fr-fr\n"
 
 #: ../views.py:16
 msgid "Clear clipboard"
-msgstr "Vider le presse-papier"
+msgstr ""
 
 #: ../menu.py:11
 msgid "Clipboard"
-msgstr "Presse-papier"
+msgstr ""
 
 #: ../actions.py:55
 #: ../views.py:31
 msgid "Copy"
-msgstr "Copier"
+msgstr ""
 
 #: ../actions.py:54
 #: ../views.py:55
 msgid "Cut"
-msgstr "Couper"
+msgstr ""
 
 #: ../views.py:80
 msgid "Paste"
-msgstr "Coller"
+msgstr ""
 
 #. Default: "Clipboard cleared"
 #: ../views.py:25
 msgid "clipboard_cleared"
-msgstr "Le presse-papier a été vidé."
+msgstr ""
 
 #. Default: "Object '${name}' copied to clipboard."
 #: ../views.py:42
 msgid "object_copied"
-msgstr "L'objet '${name}' a été copié dans le presse-papier."
+msgstr ""
 
 #. Default: "Object '${name}' cannot be copied"
 #: ../views.py:46
 msgid "object_copy_error"
-msgstr "L'objet '${name}' ne peut être copié."
+msgstr ""
 
 #. Default: "Object '${name}' cannot be moved."
 #: ../views.py:71
 msgid "object_move_error"
-msgstr "L'objet '${name}' ne peut être déplacé."
+msgstr ""
 
 #. Default: "Object '${name}' cut to clipboard."
 #: ../views.py:66
 msgid "object_moved"
-msgstr "L'objet '${name}' a été coupé."
+msgstr ""
 
 #. Default: "Object(s) ${names} pasted with success."
 #: ../views.py:97
 msgid "object_pasted"
-msgstr "Objet(s) collé(s) avec succès."
+msgstr ""
 
 #. Default: "Couldn't paste : ${names}"
 #: ../views.py:91
 msgid "paste_errors"
-msgstr "Impossible de coller : ${names}."
+msgstr ""
 

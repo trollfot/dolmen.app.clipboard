@@ -4,11 +4,11 @@ import grokcore.viewlet as grok
 from dolmen import menu
 from zope.location import ILocation
 from dolmen.app.layout import MenuViewlet, AboveBody
-
+from dolmen.app.clipboard import MF as _
 
 class CopyPasteMenu(menu.Menu):
     grok.name('copypaste')
-    grok.title('Clipboard')
+    grok.title(_('Clipboard'))
     grok.context(ILocation)
     menu_class = u"menu additional-actions"
 
