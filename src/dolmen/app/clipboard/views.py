@@ -15,7 +15,7 @@ from zope.container.interfaces import IContainer
 class ClearClipBoard(grok.View):
     grok.title(_(u"Clear clipboard"))
     grok.context(ILocation)
-    grok.require("dolmen.content.View")
+    grok.require(security.CanEditContent)
 
     def render(self):
         """Clears the clipboard.
